@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(iconv:*)",
+      "WebFetch(domain:help.claris.com)",
+      "Bash(pip install:*)",
+      "Bash(python test_parser.py:*)",
+      "Bash(python inspect_xml.py:*)",
+      "Bash(python find_fields.py:*)",
+      "Bash(python analyze_structure.py:*)",
+      "Bash(curl:*)",
+      "Bash(python test_upload.py:*)",
+      "Bash(chmod:*)",
+      "Bash(python find_variables.py:*)",
+      "Bash(python find_scripts.py:*)",
+      "Bash(python analyze_set_variable.py:*)",
+      "Bash(python analyze_parameters.py:*)",
+      "Bash(python extract_variables.py:*)",
+      "Bash(python:*)"
+    ]
+  }
+}
