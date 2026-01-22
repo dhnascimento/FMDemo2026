@@ -25,8 +25,9 @@ class DDRVariableList extends HTMLElement {
                 :host {
                     display: block;
                     height: 100%;
-                    background: white;
-                    border-left: 1px solid #e2e8f0;
+                    background: var(--color-bg-primary, #ffffff);
+                    border-left: 1px solid var(--color-border, #e2e8f0);
+                    transition: background-color 0.3s ease, border-color 0.3s ease;
                 }
 
                 .variable-list-container {
@@ -37,14 +38,15 @@ class DDRVariableList extends HTMLElement {
 
                 .header {
                     padding: 1.5rem;
-                    border-bottom: 1px solid #e2e8f0;
-                    background: #f8fafc;
+                    border-bottom: 1px solid var(--color-border, #e2e8f0);
+                    background: var(--color-bg-secondary, #f8fafc);
+                    transition: background-color 0.3s ease, border-color 0.3s ease;
                 }
 
                 .header h2 {
                     margin: 0 0 1rem 0;
                     font-size: 1.25rem;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                 }
 
                 .tabs {
@@ -56,8 +58,9 @@ class DDRVariableList extends HTMLElement {
                 .tab {
                     flex: 1;
                     padding: 0.5rem 1rem;
-                    border: 1px solid #cbd5e1;
-                    background: white;
+                    border: 1px solid var(--color-border-input, #cbd5e1);
+                    background: var(--color-bg-primary, #ffffff);
+                    color: var(--color-text-primary, #1e293b);
                     border-radius: 6px;
                     cursor: pointer;
                     transition: all 0.2s ease;
@@ -66,33 +69,40 @@ class DDRVariableList extends HTMLElement {
                 }
 
                 .tab:hover {
-                    background: #f1f5f9;
+                    background: var(--color-bg-tertiary, #f1f5f9);
                 }
 
                 .tab.active {
-                    background: #2563eb;
+                    background: var(--color-primary, #2563eb);
                     color: white;
-                    border-color: #2563eb;
+                    border-color: var(--color-primary, #2563eb);
                 }
 
                 .search-box {
                     width: 100%;
                     padding: 0.75rem;
-                    border: 1px solid #cbd5e1;
+                    border: 1px solid var(--color-border-input, #cbd5e1);
                     border-radius: 6px;
                     font-size: 0.9rem;
                     box-sizing: border-box;
+                    background: var(--color-bg-primary, #ffffff);
+                    color: var(--color-text-primary, #1e293b);
+                    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
                 }
 
                 .search-box:focus {
                     outline: none;
-                    border-color: #2563eb;
+                    border-color: var(--color-primary, #2563eb);
+                }
+
+                .search-box::placeholder {
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .variable-count {
                     margin-top: 0.5rem;
                     font-size: 0.85rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .variable-list {
@@ -104,32 +114,32 @@ class DDRVariableList extends HTMLElement {
                 .variable-item {
                     padding: 1rem 1.5rem;
                     cursor: pointer;
-                    border-bottom: 1px solid #f1f5f9;
+                    border-bottom: 1px solid var(--color-border-light, #f1f5f9);
                     transition: background 0.2s ease;
                 }
 
                 .variable-item:hover {
-                    background: #f8fafc;
+                    background: var(--color-bg-secondary, #f8fafc);
                 }
 
                 .variable-name {
                     font-weight: 600;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                     margin-bottom: 0.25rem;
                     font-family: 'Courier New', monospace;
                 }
 
                 .variable-name.global {
-                    color: #dc2626;
+                    color: var(--color-accent-red, #dc2626);
                 }
 
                 .variable-name.local {
-                    color: #2563eb;
+                    color: var(--color-primary, #2563eb);
                 }
 
                 .variable-info {
                     font-size: 0.85rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .variable-scripts {
@@ -139,20 +149,20 @@ class DDRVariableList extends HTMLElement {
 
                 .script-name {
                     font-size: 0.8rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     margin: 0.25rem 0;
                 }
 
                 .empty-state {
                     padding: 2rem 1.5rem;
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .loading-state {
                     padding: 2rem 1.5rem;
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
             </style>
 

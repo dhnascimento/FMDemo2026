@@ -23,8 +23,9 @@ class DDRTableList extends HTMLElement {
                 :host {
                     display: block;
                     height: 100%;
-                    background: white;
-                    border-right: 1px solid #e2e8f0;
+                    background: var(--color-bg-primary, #ffffff);
+                    border-right: 1px solid var(--color-border, #e2e8f0);
+                    transition: background-color 0.3s ease, border-color 0.3s ease;
                 }
 
                 .table-list-container {
@@ -35,34 +36,42 @@ class DDRTableList extends HTMLElement {
 
                 .header {
                     padding: 1.5rem;
-                    border-bottom: 1px solid #e2e8f0;
-                    background: #f8fafc;
+                    border-bottom: 1px solid var(--color-border, #e2e8f0);
+                    background: var(--color-bg-secondary, #f8fafc);
+                    transition: background-color 0.3s ease, border-color 0.3s ease;
                 }
 
                 .header h2 {
                     margin: 0 0 1rem 0;
                     font-size: 1.25rem;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                 }
 
                 .search-box {
                     width: 100%;
                     padding: 0.75rem;
-                    border: 1px solid #cbd5e1;
+                    border: 1px solid var(--color-border-input, #cbd5e1);
                     border-radius: 6px;
                     font-size: 0.9rem;
                     box-sizing: border-box;
+                    background: var(--color-bg-primary, #ffffff);
+                    color: var(--color-text-primary, #1e293b);
+                    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
                 }
 
                 .search-box:focus {
                     outline: none;
-                    border-color: #2563eb;
+                    border-color: var(--color-primary, #2563eb);
+                }
+
+                .search-box::placeholder {
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .table-count {
                     margin-top: 0.5rem;
                     font-size: 0.85rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .table-list {
@@ -74,40 +83,40 @@ class DDRTableList extends HTMLElement {
                 .table-item {
                     padding: 1rem 1.5rem;
                     cursor: pointer;
-                    border-bottom: 1px solid #f1f5f9;
+                    border-bottom: 1px solid var(--color-border-light, #f1f5f9);
                     transition: background 0.2s ease;
                 }
 
                 .table-item:hover {
-                    background: #f8fafc;
+                    background: var(--color-bg-secondary, #f8fafc);
                 }
 
                 .table-item.selected {
-                    background: #eff6ff;
-                    border-left: 3px solid #2563eb;
+                    background: var(--color-bg-hover, #eff6ff);
+                    border-left: 3px solid var(--color-primary, #2563eb);
                 }
 
                 .table-name {
                     font-weight: 600;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                     margin-bottom: 0.25rem;
                 }
 
                 .table-info {
                     font-size: 0.85rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .empty-state {
                     padding: 2rem 1.5rem;
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .loading-state {
                     padding: 2rem 1.5rem;
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
             </style>
 

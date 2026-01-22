@@ -31,8 +31,56 @@ class DDRAnalyzerApp {
         // Set up event listeners
         this.setupEventListeners();
         this.setupSidebarTabs();
+        this.setupThemeToggle();
 
         console.log('FileMaker DDR Analyzer initialized');
+    }
+
+    setupThemeToggle() {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+
+        // Check for saved theme preference or system preference
+        const savedTheme = localStorage.getItem('ddr-theme');
+        const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+
+        // Apply initial theme
+        this.setTheme(initialTheme);
+
+        // Toggle theme on click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            this.setTheme(newTheme);
+            localStorage.setItem('ddr-theme', newTheme);
+        });
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('ddr-theme')) {
+                this.setTheme(e.matches ? 'dark' : 'light');
+            }
+        });
+    }
+
+    setTheme(theme) {
+        const themeIcon = document.getElementById('themeIcon');
+        const themeLabel = document.getElementById('themeLabel');
+
+        document.documentElement.setAttribute('data-theme', theme);
+
+        if (theme === 'dark') {
+            themeIcon.textContent = '☀️';
+            themeLabel.textContent = 'Light';
+        } else {
+            themeIcon.textContent = '🌙';
+            themeLabel.textContent = 'Dark';
+        }
+
+        // Dispatch custom event for components that need to update
+        window.dispatchEvent(new CustomEvent('theme-changed', { detail: { theme } }));
     }
 
     setupSidebarTabs() {
