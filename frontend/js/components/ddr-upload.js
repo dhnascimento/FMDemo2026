@@ -26,42 +26,43 @@ class DDRUpload extends HTMLElement {
                 }
 
                 .upload-container {
-                    background: white;
+                    background: var(--color-bg-primary, #ffffff);
                     border-radius: 12px;
                     padding: 3rem;
-                    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                    box-shadow: var(--shadow-md, 0 4px 6px rgba(0, 0, 0, 0.1));
+                    transition: background-color 0.3s ease, box-shadow 0.3s ease;
                 }
 
                 .upload-area {
-                    border: 3px dashed #cbd5e1;
+                    border: 3px dashed var(--color-border-input, #cbd5e1);
                     border-radius: 8px;
                     padding: 3rem 2rem;
                     text-align: center;
                     cursor: pointer;
                     transition: all 0.3s ease;
-                    background: #f8fafc;
+                    background: var(--color-bg-secondary, #f8fafc);
                 }
 
                 .upload-area:hover,
                 .upload-area.drag-over {
-                    border-color: #2563eb;
-                    background: #eff6ff;
+                    border-color: var(--color-primary, #2563eb);
+                    background: var(--color-bg-hover, #eff6ff);
                 }
 
                 .upload-icon {
                     font-size: 3rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     margin-bottom: 1rem;
                 }
 
                 .upload-text {
-                    color: #334155;
+                    color: var(--color-text-secondary, #334155);
                     font-size: 1.1rem;
                     margin-bottom: 0.5rem;
                 }
 
                 .upload-hint {
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     font-size: 0.9rem;
                 }
 
@@ -70,7 +71,7 @@ class DDRUpload extends HTMLElement {
                 }
 
                 .upload-button {
-                    background: #2563eb;
+                    background: var(--color-primary, #2563eb);
                     color: white;
                     border: none;
                     padding: 0.75rem 2rem;
@@ -82,11 +83,11 @@ class DDRUpload extends HTMLElement {
                 }
 
                 .upload-button:hover {
-                    background: #1d4ed8;
+                    background: var(--color-primary-hover, #1d4ed8);
                 }
 
                 .upload-button:disabled {
-                    background: #94a3b8;
+                    background: var(--color-text-muted, #94a3b8);
                     cursor: not-allowed;
                 }
 
@@ -102,14 +103,14 @@ class DDRUpload extends HTMLElement {
                 .progress-bar {
                     width: 100%;
                     height: 8px;
-                    background: #e2e8f0;
+                    background: var(--color-border, #e2e8f0);
                     border-radius: 4px;
                     overflow: hidden;
                 }
 
                 .progress-fill {
                     height: 100%;
-                    background: #2563eb;
+                    background: var(--color-primary, #2563eb);
                     transition: width 0.3s ease;
                     width: 0%;
                 }
@@ -117,17 +118,18 @@ class DDRUpload extends HTMLElement {
                 .progress-text {
                     text-align: center;
                     margin-top: 0.5rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     font-size: 0.9rem;
                 }
 
                 .error-message {
-                    background: #fee2e2;
-                    color: #991b1b;
+                    background: var(--color-error-bg, #fee2e2);
+                    color: var(--color-error-text, #991b1b);
                     padding: 1rem;
                     border-radius: 6px;
                     margin-top: 1rem;
                     display: none;
+                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
                 .error-message.active {
@@ -135,12 +137,13 @@ class DDRUpload extends HTMLElement {
                 }
 
                 .success-message {
-                    background: #d1fae5;
-                    color: #065f46;
+                    background: var(--color-success-bg, #d1fae5);
+                    color: var(--color-success-text, #065f46);
                     padding: 1rem;
                     border-radius: 6px;
                     margin-top: 1rem;
                     display: none;
+                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
                 .success-message.active {
@@ -161,12 +164,12 @@ class DDRUpload extends HTMLElement {
                 .stat-value {
                     font-size: 2rem;
                     font-weight: bold;
-                    color: #2563eb;
+                    color: var(--color-primary, #2563eb);
                 }
 
                 .stat-label {
                     font-size: 0.9rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     margin-top: 0.25rem;
                 }
             </style>

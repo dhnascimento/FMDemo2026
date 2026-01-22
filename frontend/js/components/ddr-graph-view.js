@@ -28,8 +28,9 @@ class DDRGraphView extends HTMLElement {
                 .graph-container {
                     width: 100%;
                     height: 100%;
-                    background: #f8fafc;
+                    background: var(--color-bg-secondary, #f8fafc);
                     position: relative;
+                    transition: background-color 0.3s ease;
                 }
 
                 #cy {
@@ -48,19 +49,19 @@ class DDRGraphView extends HTMLElement {
                 }
 
                 .control-btn {
-                    background: white;
-                    border: 1px solid #cbd5e1;
+                    background: var(--color-bg-primary, #ffffff);
+                    border: 1px solid var(--color-border-input, #cbd5e1);
                     padding: 0.75rem;
                     border-radius: 6px;
                     cursor: pointer;
                     font-size: 1.2rem;
                     transition: all 0.2s ease;
-                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                    box-shadow: var(--shadow-sm, 0 2px 4px rgba(0, 0, 0, 0.1));
                 }
 
                 .control-btn:hover {
-                    background: #f1f5f9;
-                    border-color: #2563eb;
+                    background: var(--color-bg-tertiary, #f1f5f9);
+                    border-color: var(--color-primary, #2563eb);
                 }
 
                 .loading-overlay {
@@ -69,11 +70,12 @@ class DDRGraphView extends HTMLElement {
                     left: 0;
                     right: 0;
                     bottom: 0;
-                    background: rgba(248, 250, 252, 0.95);
+                    background: var(--loading-overlay-bg, rgba(248, 250, 252, 0.95));
                     display: flex;
                     align-items: center;
                     justify-content: center;
                     z-index: 20;
+                    transition: background-color 0.3s ease;
                 }
 
                 .loading-overlay.hidden {
@@ -82,7 +84,7 @@ class DDRGraphView extends HTMLElement {
 
                 .loading-content {
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .loading-spinner {
@@ -102,7 +104,7 @@ class DDRGraphView extends HTMLElement {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
             </style>
 
@@ -138,6 +140,60 @@ class DDRGraphView extends HTMLElement {
         zoomInBtn.addEventListener('click', () => this.zoomIn());
         zoomOutBtn.addEventListener('click', () => this.zoomOut());
         resetBtn.addEventListener('click', () => this.resetGraph());
+
+        // Listen for theme changes
+        window.addEventListener('theme-changed', () => this.updateCytoscapeTheme());
+    }
+
+    getThemeColors() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        return {
+            nodeBackground: isDark ? '#3b82f6' : '#2563eb',
+            nodeBackgroundSelected: isDark ? '#60a5fa' : '#1d4ed8',
+            nodeBorder: isDark ? '#2563eb' : '#1e40af',
+            nodeBorderSelected: isDark ? '#1d4ed8' : '#1e3a8a',
+            nodeText: isDark ? '#f1f5f9' : '#1e293b',
+            edgeLine: isDark ? '#64748b' : '#94a3b8',
+            edgeLineSelected: isDark ? '#3b82f6' : '#2563eb',
+            edgeText: isDark ? '#94a3b8' : '#64748b',
+            cascadeDelete: isDark ? '#ef4444' : '#dc2626'
+        };
+    }
+
+    updateCytoscapeTheme() {
+        if (!this.cy) return;
+
+        const colors = this.getThemeColors();
+
+        this.cy.style()
+            .selector('node')
+            .style({
+                'background-color': colors.nodeBackground,
+                'color': colors.nodeText,
+                'border-color': colors.nodeBorder
+            })
+            .selector('node:selected')
+            .style({
+                'background-color': colors.nodeBackgroundSelected,
+                'border-color': colors.nodeBorderSelected
+            })
+            .selector('edge')
+            .style({
+                'line-color': colors.edgeLine,
+                'target-arrow-color': colors.edgeLine,
+                'color': colors.edgeText
+            })
+            .selector('edge:selected')
+            .style({
+                'line-color': colors.edgeLineSelected,
+                'target-arrow-color': colors.edgeLineSelected
+            })
+            .selector('edge[cascadeDeleteLeft = true]')
+            .style({
+                'line-color': colors.cascadeDelete,
+                'target-arrow-color': colors.cascadeDelete
+            })
+            .update();
     }
 
     async loadGraph() {
@@ -157,6 +213,7 @@ class DDRGraphView extends HTMLElement {
 
     initializeCytoscape() {
         const container = this.shadowRoot.getElementById('cy');
+        const colors = this.getThemeColors();
 
         // Initialize Cytoscape
         this.cy = cytoscape({
@@ -172,8 +229,8 @@ class DDRGraphView extends HTMLElement {
                         'label': 'data(label)',
                         'text-valign': 'center',
                         'text-halign': 'center',
-                        'background-color': '#2563eb',
-                        'color': '#1e293b',
+                        'background-color': colors.nodeBackground,
+                        'color': colors.nodeText,
                         'font-size': '12px',
                         'width': 'label',
                         'height': 'label',
@@ -182,14 +239,14 @@ class DDRGraphView extends HTMLElement {
                         'text-wrap': 'wrap',
                         'text-max-width': '150px',
                         'border-width': 2,
-                        'border-color': '#1e40af'
+                        'border-color': colors.nodeBorder
                     }
                 },
                 {
                     selector: 'node:selected',
                     style: {
-                        'background-color': '#1d4ed8',
-                        'border-color': '#1e3a8a',
+                        'background-color': colors.nodeBackgroundSelected,
+                        'border-color': colors.nodeBorderSelected,
                         'border-width': 3
                     }
                 },
@@ -197,13 +254,13 @@ class DDRGraphView extends HTMLElement {
                     selector: 'edge',
                     style: {
                         'width': 2,
-                        'line-color': '#94a3b8',
-                        'target-arrow-color': '#94a3b8',
+                        'line-color': colors.edgeLine,
+                        'target-arrow-color': colors.edgeLine,
                         'target-arrow-shape': 'triangle',
                         'curve-style': 'bezier',
                         'label': 'data(label)',
                         'font-size': '10px',
-                        'color': '#64748b',
+                        'color': colors.edgeText,
                         'text-rotation': 'autorotate',
                         'text-margin-y': -10
                     }
@@ -211,16 +268,16 @@ class DDRGraphView extends HTMLElement {
                 {
                     selector: 'edge:selected',
                     style: {
-                        'line-color': '#2563eb',
-                        'target-arrow-color': '#2563eb',
+                        'line-color': colors.edgeLineSelected,
+                        'target-arrow-color': colors.edgeLineSelected,
                         'width': 3
                     }
                 },
                 {
                     selector: 'edge[cascadeDeleteLeft = true]',
                     style: {
-                        'line-color': '#dc2626',
-                        'target-arrow-color': '#dc2626'
+                        'line-color': colors.cascadeDelete,
+                        'target-arrow-color': colors.cascadeDelete
                     }
                 },
                 {

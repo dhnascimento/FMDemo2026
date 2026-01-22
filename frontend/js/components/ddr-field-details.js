@@ -21,9 +21,10 @@ class DDRFieldDetails extends HTMLElement {
                 :host {
                     display: block;
                     height: 100%;
-                    background: white;
-                    border-left: 1px solid #e2e8f0;
+                    background: var(--color-bg-primary, #ffffff);
+                    border-left: 1px solid var(--color-border, #e2e8f0);
                     overflow-y: auto;
+                    transition: background-color 0.3s ease, border-color 0.3s ease;
                 }
 
                 .details-container {
@@ -32,7 +33,7 @@ class DDRFieldDetails extends HTMLElement {
 
                 .empty-state {
                     text-align: center;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     padding: 3rem 1.5rem;
                 }
 
@@ -48,10 +49,10 @@ class DDRFieldDetails extends HTMLElement {
                 .section-title {
                     font-size: 1.1rem;
                     font-weight: 600;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                     margin-bottom: 1rem;
                     padding-bottom: 0.5rem;
-                    border-bottom: 2px solid #e2e8f0;
+                    border-bottom: 2px solid var(--color-border, #e2e8f0);
                 }
 
                 .info-grid {
@@ -63,11 +64,11 @@ class DDRFieldDetails extends HTMLElement {
 
                 .info-label {
                     font-weight: 600;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .info-value {
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                 }
 
                 .field-list {
@@ -78,14 +79,15 @@ class DDRFieldDetails extends HTMLElement {
 
                 .field-item {
                     padding: 1rem;
-                    background: #f8fafc;
+                    background: var(--color-bg-secondary, #f8fafc);
                     border-radius: 6px;
-                    border-left: 3px solid #2563eb;
+                    border-left: 3px solid var(--color-primary, #2563eb);
+                    transition: background-color 0.3s ease;
                 }
 
                 .field-name {
                     font-weight: 600;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                     margin-bottom: 0.25rem;
                 }
 
@@ -93,7 +95,7 @@ class DDRFieldDetails extends HTMLElement {
                     display: flex;
                     gap: 1rem;
                     font-size: 0.85rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
 
                 .badge {
@@ -102,21 +104,22 @@ class DDRFieldDetails extends HTMLElement {
                     border-radius: 4px;
                     font-size: 0.75rem;
                     font-weight: 600;
+                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
                 .badge-normal {
-                    background: #dbeafe;
-                    color: #1e40af;
+                    background: var(--color-badge-normal-bg, #dbeafe);
+                    color: var(--color-badge-normal-text, #1e40af);
                 }
 
                 .badge-calculated {
-                    background: #fef3c7;
-                    color: #92400e;
+                    background: var(--color-badge-calculated-bg, #fef3c7);
+                    color: var(--color-badge-calculated-text, #92400e);
                 }
 
                 .badge-summary {
-                    background: #dcfce7;
-                    color: #166534;
+                    background: var(--color-badge-summary-bg, #dcfce7);
+                    color: var(--color-badge-summary-text, #166534);
                 }
 
                 .relationship-list {
@@ -127,24 +130,25 @@ class DDRFieldDetails extends HTMLElement {
 
                 .relationship-item {
                     padding: 1rem;
-                    background: #f1f5f9;
+                    background: var(--color-bg-tertiary, #f1f5f9);
                     border-radius: 6px;
+                    transition: background-color 0.3s ease;
                 }
 
                 .relationship-tables {
                     font-weight: 600;
-                    color: #1e293b;
+                    color: var(--color-text-primary, #1e293b);
                     margin-bottom: 0.5rem;
                 }
 
                 .relationship-arrow {
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     margin: 0 0.5rem;
                 }
 
                 .relationship-fields {
                     font-size: 0.85rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                     margin-top: 0.5rem;
                 }
 
@@ -157,16 +161,17 @@ class DDRFieldDetails extends HTMLElement {
 
                 .option-tag {
                     padding: 0.25rem 0.5rem;
-                    background: #fee2e2;
-                    color: #991b1b;
+                    background: var(--color-accent-red-light, #fee2e2);
+                    color: var(--color-error-text, #991b1b);
                     border-radius: 4px;
                     font-size: 0.75rem;
+                    transition: background-color 0.3s ease, color 0.3s ease;
                 }
 
                 .loading-state {
                     text-align: center;
                     padding: 2rem;
-                    color: #64748b;
+                    color: var(--color-text-muted, #64748b);
                 }
             </style>
 
